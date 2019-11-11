@@ -4,6 +4,7 @@
 
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
 
     public class Car
     {
@@ -24,6 +25,8 @@
 
         public int ModelId { get; set; }
         public Model Model { get; set; }
+
+        public ICollection<CarPurchase> Owners { get; set; } = new HashSet<CarPurchase>();
 
     }
 }

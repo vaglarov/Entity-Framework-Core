@@ -93,6 +93,33 @@
 
 
 
+            //var carId = db.Cars.FirstOrDefault(c => c.CarId == 1);
+
+            //var newCustomer = new Customer
+            //{
+            //    FirstName = "Ivan",
+            //    LastName = "Ivanov",
+            //    Age = 21
+
+            //};
+
+            //newCustomer.Purcheses.Add(new CarPurchase
+            //{
+            //    Car = carId,
+            //    PurchaseDate = DateTime.Now.AddDays(-10),
+            //    Price = carId.Price * (decimal)0.8
+            //});
+
+            //db.Customers.Add(newCustomer);
+
+            var customer = db.Customers.FirstOrDefault(c => c.Id == 1);
+
+            customer.Address = new Address
+            {
+                Text = "3-A-7",
+                Town = "Sofia"
+            }; 
+          
             db.SaveChanges();
         }
     }

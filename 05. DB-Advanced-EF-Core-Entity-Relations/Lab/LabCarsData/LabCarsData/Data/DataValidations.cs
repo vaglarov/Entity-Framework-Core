@@ -24,5 +24,11 @@
             public const int MaxFirstNameLength = 30;
             public const int MaxLastNameLength = 30;
         }
+
+        public static class Address
+        {
+            public const int MaxTextLength = 50;
+            public const int MaxTownLength = 30;
+        }
     }
 }

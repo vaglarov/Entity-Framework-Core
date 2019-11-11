@@ -4,48 +4,22 @@ using LabCarsData.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LabCarsData.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    partial class CarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191106201802_Customers")]
+    partial class Customers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("LabCarsData.Data.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Town")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
-
-                    b.ToTable("Addresses");
-                });
 
             modelBuilder.Entity("LabCarsData.Data.Models.Car", b =>
                 {
@@ -101,7 +75,7 @@ namespace LabCarsData.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Purchases");
+                    b.ToTable("CarPurchase");
                 });
 
             modelBuilder.Entity("LabCarsData.Data.Models.Customer", b =>
@@ -126,7 +100,7 @@ namespace LabCarsData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("LabCarsData.Data.Models.Make", b =>
@@ -177,15 +151,6 @@ namespace LabCarsData.Migrations
                     b.HasIndex("MakeId");
 
                     b.ToTable("Models");
-                });
-
-            modelBuilder.Entity("LabCarsData.Data.Models.Address", b =>
-                {
-                    b.HasOne("LabCarsData.Data.Models.Customer", "Customer")
-                        .WithOne("Address")
-                        .HasForeignKey("LabCarsData.Data.Models.Address", "CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LabCarsData.Data.Models.Car", b =>
