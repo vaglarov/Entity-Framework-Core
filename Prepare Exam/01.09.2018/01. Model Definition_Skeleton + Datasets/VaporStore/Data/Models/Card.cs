@@ -22,7 +22,7 @@ using System.ComponentModel.DataAnnotations;
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}")]
+        [RegularExpression("[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}")]
         public string Number { get; set; }
 
         [Required]
@@ -30,7 +30,7 @@ using System.ComponentModel.DataAnnotations;
         public string Cvc { get; set; }
 
         [Required]
-        public CadrType  Type{ get; set; }
+        public CardType  Type{ get; set; }
 
         [Required]
         public int UserId { get; set; }

@@ -5,8 +5,6 @@
     public class Tag
     {
         //•	Id – integer, Primary Key
-        //•	Name – text(required)
-        //•	GameTags - collection of type GameTag
         public Tag()
         {
             this.GameTags = new HashSet<GameTag>();
@@ -14,9 +12,11 @@
 
         public int Id { get; set; }
 
+        //•	Name – text(required)
         [Required]
         public string  Name { get; set; }
 
+        //•	GameTags - collection of type GameTag
         public ICollection<GameTag> GameTags{get;set;}
     }
 }

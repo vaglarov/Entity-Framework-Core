@@ -16,10 +16,10 @@ using VaporStore.Data.Models.Enums;
         //•	Type – enumeration of type PurchaseType, with possible values(“Retail”, “Digital”) (required) 
         [Required]
         public PurchaseType Type { get; set; }
-        //•	ProductKey – text, which consists of 3 pairs of 4 uppercase Latin letters and digits, separated by dashes(ex. “ABCD-EFGH-1J3L”) (required)
 
+        //•	ProductKey – text, which consists of 3 pairs of 4 uppercase Latin letters and digits, separated by dashes(ex. “ABCD-EFGH-1J3L”) (required)
         [Required]
-        [RegularExpression(@"[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$")]
+        [RegularExpression(@"[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}")]
         public string ProductKey { get; set; }
         //•	CardId – integer, foreign key(required)
         [Required]
