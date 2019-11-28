@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
     using Data;
     using Newtonsoft.Json;
     using VaporStore.Data.Models;
@@ -131,7 +133,64 @@
 
         public static string ImportPurchases(VaporStoreDbContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            StringBuilder stBuilder = new StringBuilder();
+
+            var xmlSeserializer = new XmlSerializer(typeof(ImportPurchasDto[]),
+                                                          new XmlRootAttribute("Purchases"));
+
+            var purchasesDto = (ImportPurchasDto[])xmlSeserializer.Deserialize(new StringReader(xmlString));
+
+            List<Purchase> purchasesList = new List<Purchase>();
+
+            foreach (var purchasDto in purchasesDto)
+            {
+                if (!IsValid(purchasDto))
+                {
+                    stBuilder.AppendLine("Invalid Data");
+                    continue;
+                }
+
+                var isValidEnum = Enum.TryParse<PurchaseType>(purchasDto.Type,out PurchaseType purchaseType);
+
+                if (!isValidEnum)
+                {
+                    stBuilder.AppendLine("Invalid Data");
+                    continue;
+                }
+
+                var game = context.Games
+                    .FirstOrDefault(g => g.Name == purchasDto.title);
+
+                var card = context.Cards
+                    .FirstOrDefault(c => c.Number == purchasDto.Card);
+                
+                if (card==null||game==null)
+                {
+                    stBuilder.AppendLine("Invalid Data Name Game");
+                    continue;
+                }
+
+                var purchase = new Purchase
+                {
+                    Type = purchaseType,
+                    Date = DateTime.ParseExact(purchasDto.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    ProductKey=purchasDto.Key,
+                    GameId=game.Id,
+                    Game = game,
+                    CardId=card.Id,
+                    Card = card
+                };
+                purchasesList.Add(purchase);
+                stBuilder.AppendLine($"Imported {purchase.Game.Name} for {purchase.Card.User.Username}");
+            }
+
+            context.Purchases.AddRange(purchasesList);
+            context.SaveChanges();
+            
+
+            string resultBuilder = stBuilder.ToString().TrimEnd();
+
+            return resultBuilder;
         }
         private static bool IsValid(object entity)
         {

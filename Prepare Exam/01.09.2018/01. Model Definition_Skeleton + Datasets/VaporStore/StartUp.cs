@@ -15,13 +15,13 @@
 
             Mapper.Initialize(config => config.AddProfile<VaporStoreProfile>());
 
-            ResetDatabase(context, shouldDropDatabase: false);
+            ResetDatabase(context, shouldDropDatabase: true);
 
 			var projectDir = GetProjectDirectory();
 
 			ImportEntities(context, projectDir + @"Datasets/", projectDir + @"ImportResults/");
 
-			ExportEntities(context, projectDir + @"ImportResults/");
+			 ExportEntities(context, projectDir + @"ImportResults/");
 
 
 			using (var transaction = context.Database.BeginTransaction())
@@ -48,11 +48,11 @@
 
 		private static void ImportEntities(VaporStoreDbContext context, string baseDir, string exportDir)
 		{
-			var games = Deserializer.ImportGames(context, File.ReadAllText(baseDir + "games.json"));
-			PrintAndExportEntityToFile(games, exportDir + "ImportGames.txt");
-
-			var users = Deserializer.ImportUsers(context, File.ReadAllText(baseDir + "users.json"));
-			PrintAndExportEntityToFile(users, exportDir + "ImportUsers.txt");
+		var games = Deserializer.ImportGames(context, File.ReadAllText(baseDir + "games.json"));
+		PrintAndExportEntityToFile(games, exportDir + "ImportGames.txt");
+        
+		var users = Deserializer.ImportUsers(context, File.ReadAllText(baseDir + "users.json"));
+		PrintAndExportEntityToFile(users, exportDir + "ImportUsers.txt");
 
 			var purchases = Deserializer.ImportPurchases(context, File.ReadAllText(baseDir + "purchases.xml"));
 			PrintAndExportEntityToFile(purchases, exportDir + "ImportPurchases.txt");
