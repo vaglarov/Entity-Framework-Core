@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 2,
+    "Genre": "Violent",
+    "Games": [
+      {
+        "Id": 50,
+        "Title": "Warframe",
+        "Deleloper": "Digital Extremes",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Steam Trading Cards }, { Name = In-App Purchases }, { Name = Single-player }, { Name = Partial Controller Support }",
+        "Players": 6
+      },
+      {
+        "Id": 22,
+        "Title": "Soul at Stake",
+        "Deleloper": "Chongming Studio",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Online Multi-Player }, { Name = Steam Cloud }, { Name = Online Co-op }",
+        "Players": 2
+      },
+      {
+        "Id": 44,
+        "Title": "Black Desert Online",
+        "Deleloper": "Pearl Abyss",
+        "Tags": "{ Name = Steam Trading Cards }, { Name = In-App Purchases }, { Name = Partial Controller Support }, { Name = Online Multi-Player }, { Name = Online Co-op }, { Name = MMO }",
+        "Players": 1
+      },
+      {
+        "Id": 57,
+        "Title": "Dead by Daylight",
+        "Deleloper": "Behaviour Digital Inc.",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Steam Trading Cards }, { Name = Steam Achievements }, { Name = Online Multi-Player }, { Name = Full controller support }, { Name = Steam Cloud }, { Name = Online Co-op }",
+        "Players": 1
+      }
+    ],
+    "TotalPlayers": 10
+  },
+  {
+    "Id": 5,
+    "Genre": "Nudity",
+    "Games": [
+      {
+        "Id": 40,
+        "Title": "Path of Exile",
+        "Deleloper": "Grinding Gear Games",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Steam Trading Cards }, { Name = In-App Purchases }, { Name = Single-player }, { Name = Steam Achievements }, { Name = Online Multi-Player }, { Name = MMO }",
+        "Players": 2
+      },
+      {
+        "Id": 15,
+        "Title": "Rust",
+        "Deleloper": "Facepunch Studios",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Steam Trading Cards }, { Name = Steam Workshop }, { Name = In-App Purchases }, { Name = Valve Anti-Cheat enabled }, { Name = Steam Achievements }, { Name = Stats }, { Name = Online Multi-Player }, { Name = Cross-Platform Multiplayer }, { Name = Online Co-op }, { Name = MMO }",
+        "Players": 1
+      },
+      {
+        "Id": 29,
+        "Title": "Conan Exiles",
+        "Deleloper": "Funcom",
+        "Tags": "{ Name = Multi-player }, { Name = Co-op }, { Name = Steam Trading Cards }, { Name = Steam Workshop }, { Name = Single-player }, { Name = Steam Achievements }, { Name = Online Multi-Player }, { Name = Full controller support }, { Name = Online Co-op }",
+        "Players": 1
+      },
+      {
+        "Id": 74,
+        "Title": "The Witcher 3: Wild Hunt",
+        "Deleloper": "CD PROJEKT RED",
+        "Tags": "{ Name = Steam Trading Cards }, { Name = Single-player }, { Name = Steam Achievements }, { Name = Full controller support }, { Name = Steam Cloud }",
+        "Players": 1
+      }
+    ],
+    "TotalPlayers": 5
+  }
+]
