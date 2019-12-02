@@ -44,7 +44,7 @@
             PrintAndExportEntityToFile(songs, exportDir + "ImportSongs.txt");
 
             var performers = DataProcessor.Deserializer.ImportSongPerformers(context, 
-                File.ReadAllText(baseDir + "Actual - ImportSongPerformers.xml"));
+                File.ReadAllText(baseDir + "ImportSongPerformers.xml"));
             PrintAndExportEntityToFile(performers, exportDir + "ImportSongPerformers.txt");
         }
 

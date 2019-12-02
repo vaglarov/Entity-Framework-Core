@@ -201,11 +201,13 @@
 
                 var uniqueSong = songsList.Where(s => s.Name == songDto.Name).FirstOrDefault();
 
-                if (uniqueSong!=null)
+                if (uniqueSong != null)
                 {
                     stBuilder.AppendLine(ErrorMessage);
                     continue;
                 }
+
+
 
                 var song = new Song
                 {
@@ -234,7 +236,72 @@
 
         public static string ImportSongPerformers(MusicHubDbContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            StringBuilder stBuilder = new StringBuilder();
+
+            var xmlSeserializer = new XmlSerializer(typeof(ImportPerformerDto[]),
+                                                          new XmlRootAttribute("Performers"));
+            var performersDto = (ImportPerformerDto[])xmlSeserializer.Deserialize(new StringReader(xmlString));
+
+            var performerList = new List<Performer>();
+            foreach (var performerDto in performersDto)
+            {
+                if (!IsValid(performerDto))
+                {
+                    stBuilder.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                bool havesongs = true;
+                var songs = new List<Song>();
+                foreach (var songDto in performerDto.MappingTable)
+                {
+                    Song song = context.Songs.Where(s => s.Id == songDto.DtoId).FirstOrDefault();
+                    if (song == null)
+                    {
+                        songs.Clear();
+                        havesongs = false;
+                        break;
+                    }
+                    else
+                    {
+                        songs.Add(song);
+                    }
+                }
+
+                if (!havesongs)
+                {
+                    stBuilder.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var performer = new Performer
+                {
+                    FirstName = performerDto.FirstName,
+                    LastName = performerDto.LastName,
+                    Age = performerDto.Age,
+                    NetWorth = performerDto.NetWorth
+                };
+                 context.Performers.Add(performer);
+
+                foreach (var song in songs)
+                {
+                    var songPerformer = new SongPerformer
+                    {
+                        Song = song,
+                        Performer = performer
+                    };
+                    context.SongsPerformers.Add(songPerformer);
+                }
+                // Imported { performer first name} ({ songs count}songs)
+                string message = String.Format(SuccessfullyImportedPerformer, performer.FirstName, songs.Count);
+
+                stBuilder.AppendLine(message);
+
+            }
+            string result = stBuilder.ToString().TrimEnd();
+            context.SaveChanges();
+
+            return result;
         }
 
         private static bool IsValid(object entity)

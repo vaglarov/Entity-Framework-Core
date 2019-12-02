@@ -1,6 +1,8 @@
 ﻿namespace MusicHub
 {
     using AutoMapper;
+    using MusicHub.Data.Models;
+    using MusicHub.DataProcessor.ImportDtos;
 
     public class MusicHubProfile : Profile
     {
